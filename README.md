@@ -1,36 +1,90 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LYDesign — Studio Website
 
-## Getting Started
+Marketing and portfolio website for **LYDesign**, an Auckland-based residential architecture studio. Built with Next.js 15 (App Router) and CSS Modules.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Tech Stack
+
+- **Framework**: Next.js 15, App Router, React 19
+- **Styling**: CSS Modules (no CSS framework)
+- **Images**: `next/image` with static assets from `/public` and Unsplash remote patterns
+- **Fonts**: Google Fonts via `next/font` — display serif paired with body sans-serif
+- **Language**: TypeScript throughout
+- **Deployment**: Vercel (recommended)
+
+---
+
+## Design System
+
+### Palette
+A warm neutral palette with high contrast black ink on white/paper surfaces. Dark pages (home, project listing) use near-black `#0f0f0e` backgrounds with off-white `#f8f5ed` text.
+
+| Token | Value | Usage |
+|---|---|---|
+| `--color-ink` | `#10100f` | Body text, headings |
+| `--color-paper` | `#f4f1ea` | Warm background tint |
+| `--color-stone` | `#6d6a64` | Secondary / label text |
+| `--color-line` | `rgba(16,16,15,0.18)` | Dividers, borders |
+| `--color-white` | `#ffffff` | Page background |
+
+### Typography
+Two-font pairing defined via CSS variables:
+- `--font-display` — serif display font used for all headings (`h1`–`h6`), nav links, project titles
+- `--font-body` — sans-serif used for body copy, labels, UI text
+
+Type sizes use `clamp()` throughout for fluid scaling without breakpoint jumps.
+
+### Motion
+Two easing tokens drive all transitions:
+- `--ease-cinematic` `cubic-bezier(0.16, 1, 0.3, 1)` — page reveals, gallery lifts, image hovers
+- `--ease-standard` `cubic-bezier(0.22, 0.61, 0.36, 1)` — interactive UI elements
+
+Page entry uses the `.pageReveal` utility class (fade + translate-up). Gallery images use staggered `animation-delay` via `blockIndex`.
+
+### Navigation
+The header is always `position: fixed` and transparent. Text and icon colour adapts per page context:
+- **Dark header** (home `/`, project listing `/project`) — white hamburger, white logo name
+- **Light header** (all other pages) — dark hamburger, dark logo name
+
+The mobile menu is a full-screen overlay (`rgba(9,9,8,0.94)`) with staggered nav link animations. The close button sits top-left at the same position as the hamburger.
+
+---
+
+## Project Structure
+
+```
+src/
+  app/
+    page.tsx              # Home — full-bleed hero
+    about/                # Studio, team grid, practice facts
+    project/              # Project listing (dark grid)
+      [slug]/             # Project detail (hero strip + gallery)
+    services/             # Services (hidden from nav, URL still works)
+    contact/              # Contact form
+  components/
+    site-shell.tsx        # Fixed header + mobile menu wrapper
+  lib/
+    projects.ts           # Project data — slugs, images, metadata
+public/                   # Static images (logos, hero photos)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm install
+npm run dev
+```
 
-## Learn More
+Open [http://localhost:3000](http://localhost:3000).
 
-To learn more about Next.js, take a look at the following resources:
+### Adding a project
+Edit `src/lib/projects.ts`. Each project needs at minimum: `slug`, `title`, `excerpt`, `coverImage`, and a `gallery` array. Optional fields: `topStripImage`, `planImages`, `galleryBlocks`, `tags`, `size`, `completionDate`, `credits`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Re-enabling Services in nav
+In `src/components/site-shell.tsx`, add back to `NAV_LINKS`:
+```ts
+{ href: "/services", label: "Services" },
+```

@@ -1,0 +1,237 @@
+.page {
+  padding: 0 0 3rem;
+  background: #fff;
+}
+
+.topStrip {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.topStripImage {
+  object-fit: cover;
+}
+
+.projectIntro {
+  background: #fff;
+  border-top: 1px solid rgba(16, 16, 15, 0.12);
+  padding: 3rem clamp(1.5rem, 5vw, 4rem);
+  display: grid;
+  grid-template-columns: 1.35fr 0.85fr;
+  gap: 1.5rem;
+}
+
+.projectMeta h1 {
+  font-size: clamp(1.2rem, 1.85vw, 1.75rem);
+  line-height: 1.1;
+  font-weight: 600;
+}
+
+.summary {
+  margin-top: 0.58rem;
+  color: #4a4844;
+  max-width: 62ch;
+  font-size: 0.9rem;
+}
+
+.factList {
+  margin-top: 0.8rem;
+  list-style: none;
+  display: grid;
+  gap: 0.22rem;
+}
+
+.factItem {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 0.6rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.factItem span {
+  color: #7a7771;
+}
+
+.factItem strong {
+  color: #1b1a18;
+  font-family: var(--font-body), "Trebuchet MS", sans-serif;
+  font-weight: 500;
+}
+
+.tags {
+  margin-top: 0.8rem;
+  color: #7a7771;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.planGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  align-content: start;
+}
+
+.planItem,
+.planPlaceholder {
+  position: relative;
+  min-height: 112px;
+  border: 1px solid rgba(16, 16, 15, 0.15);
+  background: #f7f7f6;
+  overflow: hidden;
+}
+
+.planImage {
+  object-fit: cover;
+  filter: grayscale(100%);
+  opacity: 0.72;
+}
+
+.galleryFlow {
+  width: 100%;
+  margin: 1.6rem 0 0;
+  display: grid;
+  gap: 1.9rem;
+  padding: 0 clamp(1.5rem, 5vw, 4rem);
+}
+
+.galleryBlock {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: lift-in 760ms var(--ease-cinematic) forwards;
+}
+
+.singleImageWrap {
+  position: relative;
+  width: 100%;
+  min-height: clamp(300px, 73vh, 840px);
+  background: #e8e8e8;
+  overflow: hidden;
+}
+
+.galleryImage {
+  object-fit: cover;
+  transition: transform var(--duration-slow) var(--ease-cinematic);
+}
+
+.galleryBlock:hover .galleryImage {
+  transform: scale(1.015);
+}
+
+.tripleBlock {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+}
+
+.tripleItem {
+  position: relative;
+  min-height: clamp(180px, 32vw, 280px);
+  background: #e8e8e8;
+  overflow: hidden;
+}
+
+.projectNav {
+  margin-top: 2.1rem;
+  padding: 1.1rem clamp(1.5rem, 5vw, 4rem) 0;
+  border-top: 1px solid rgba(16, 16, 15, 0.2);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.navLink {
+  display: grid;
+  gap: 0.16rem;
+}
+
+.navLink span {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.68rem;
+  color: #7a7771;
+}
+
+.navLink strong {
+  font-family: var(--font-display), "Times New Roman", serif;
+  font-size: clamp(1rem, 1.7vw, 1.36rem);
+  color: #171614;
+  font-weight: 600;
+}
+
+@keyframes lift-in {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .projectIntro {
+    grid-template-columns: 1fr;
+  }
+
+  .factItem {
+    grid-template-columns: 114px 1fr;
+  }
+
+  .galleryFlow {
+    gap: 1.2rem;
+  }
+
+  .singleImageWrap {
+    min-height: clamp(250px, 52vh, 560px);
+  }
+}
+
+@media (max-width: 700px) {
+  .page {
+    padding-top: 0;
+  }
+
+  .topStrip {
+    width: 100%;
+    height: 80vh;
+  }
+
+  .projectIntro {
+    padding: 1.2rem 1rem;
+  }
+
+  .summary {
+    font-size: 0.84rem;
+  }
+
+  .planGrid {
+    gap: 0.5rem;
+  }
+
+  .planItem,
+  .planPlaceholder {
+    min-height: 96px;
+  }
+
+  .tripleBlock {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .tripleItem {
+    min-height: 180px;
+  }
+
+  .projectNav {
+    margin-top: 1.5rem;
+    padding-top: 0.9rem;
+  }
+}

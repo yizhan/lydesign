@@ -1,0 +1,212 @@
+.page {
+  padding-bottom: var(--space-2xl);
+  background: #fff;
+}
+
+/* ── Hero ─────────────────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 75vh;
+  overflow: hidden;
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: center 25%;
+}
+
+/* ── Studio intro ─────────────────────────────────── */
+.introRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  padding: 3.5rem clamp(1.5rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
+  color: var(--color-stone);
+}
+
+.introLeft h1 {
+  margin-top: 0.75rem;
+  font-size: clamp(1.7rem, 3vw, 2.8rem);
+  line-height: 1.05;
+  max-width: 16ch;
+}
+
+.introText {
+  margin-top: 1.2rem;
+  color: #2d2b28;
+  max-width: 50ch;
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+.introRight {
+  display: flex;
+  align-items: center;
+}
+
+.introStatement {
+  color: var(--color-stone);
+  font-size: clamp(0.95rem, 1.15vw, 1.07rem);
+  line-height: 1.75;
+  border-left: 2px solid var(--color-ink);
+  padding-left: 1.75rem;
+}
+
+/* ── Practice facts ───────────────────────────────── */
+.factsSection {
+  padding: 3rem clamp(1.5rem, 5vw, 4rem);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.sectionLabel {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.7rem;
+  color: var(--color-stone);
+  margin-bottom: 1.5rem;
+}
+
+.factsTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.factRow {
+  border-top: 1px solid var(--color-line);
+}
+
+.factRow:last-child {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.factLabel {
+  padding: 0.9rem 2rem 0.9rem 0;
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-stone);
+  width: 220px;
+  vertical-align: top;
+}
+
+.factValue {
+  padding: 0.9rem 0;
+  font-size: 0.88rem;
+  color: var(--color-ink);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+/* ── Team grid ────────────────────────────────────── */
+.teamSection {
+  padding: 3rem clamp(1.5rem, 5vw, 4rem) 0;
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.memberCard {
+  border-right: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+}
+
+.memberCard:nth-child(3n) {
+  border-right: none;
+}
+
+.memberPhoto {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background: #e2e0db;
+  overflow: hidden;
+}
+
+.memberImage {
+  object-fit: cover;
+  filter: grayscale(100%);
+  transition: filter var(--duration-slow) var(--ease-cinematic),
+    transform var(--duration-slow) var(--ease-cinematic);
+}
+
+.memberCard:hover .memberImage {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+}
+
+.memberPlaceholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(160deg, #dddbd6 0%, #c9c7c2 100%);
+}
+
+.memberInfo {
+  padding: 1rem 1.1rem 1.2rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.memberName {
+  font-family: var(--font-display), "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.memberRole {
+  margin-top: 0.2rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-stone);
+}
+
+/* ── Responsive ───────────────────────────────────── */
+@media (max-width: 900px) {
+  .introRow {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .teamGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .memberCard:nth-child(3n) {
+    border-right: 1px solid var(--color-line);
+  }
+
+  .memberCard:nth-child(2n) {
+    border-right: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    height: 58vh;
+  }
+
+  .factsTable,
+  .factRow,
+  .factLabel,
+  .factValue {
+    display: block;
+  }
+
+  .factLabel {
+    width: auto;
+    padding-bottom: 0.1rem;
+  }
+
+  .factValue {
+    padding-top: 0;
+    padding-bottom: 0.9rem;
+  }
+}
