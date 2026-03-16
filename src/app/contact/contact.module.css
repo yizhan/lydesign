@@ -97,13 +97,16 @@
 
 @media (max-width: 768px) {
   .body {
-    grid-template-columns: 1fr;
-    align-items: flex-start;
-    gap: 2.5rem;
-    margin-top: 40px;
+    /* grid-template-columns: 1fr; */
+    /* align-items: flex-start; */
+    /* gap: 2.5rem; */
+    /* margin-top: 40px; */
     padding: var(--space-container) clamp(2rem, 5vw, 4rem);
   }
 
+  .fields {
+    width: auto;
+  }
   .social {
     flex-direction: row;
     align-self: auto;
@@ -122,7 +125,7 @@
 
 @media (max-width: 480px) {
   .body {
-    gap: 2rem;
+    /* gap: 2rem; */
   }
 
   .fields {
