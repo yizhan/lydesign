@@ -60,12 +60,14 @@
 
 .logo {
   width: auto;
-  height: 52px;
+  height: clamp(2rem, 2.5rem, 3rem);
+  /* margin-bottom: 0.8rem; */
+  vertical-align: bottom;
 }
 
 .logoName {
   font-family: var(--font-display), "Times New Roman", serif;
-  font-size: clamp(0.95rem, 1.8vw, 1.6rem);
+  font-size: clamp(2rem, 1.8vw, 3rem);
   font-weight: 600;
   letter-spacing: 0.08em;
   color: var(--color-ink);
@@ -177,12 +179,14 @@
   }
 
   .logo {
-    height: 46px;
+    height: 2rem;
+    margin-bottom: 0.4rem;
   }
 
   .menuButton {
     width: 48px;
-    height: 40px;
+    height: 2rem;
+    margin-bottom: 0.4rem;
   }
 }
 
