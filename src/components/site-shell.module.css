@@ -60,15 +60,19 @@
 
 .logo {
   width: auto;
-  height: clamp(2rem, 2.5rem, 3rem);
-  /* margin-bottom: 0.8rem; */
+  /* height: clamp(2rem, 2.5rem, 5rem); */
+  height: 4rem;
+  margin-right: 1rem;
+  margin-bottom: 1.4rem;
   vertical-align: bottom;
+
 }
 
 .logoName {
   font-family: var(--font-display), "Times New Roman", serif;
-  font-size: clamp(2rem, 1.8vw, 3rem);
-  font-weight: 600;
+  /* font-size: clamp(2rem, 1.8vw, 4rem); */
+  font-size: clamp(1.8rem, 4.8vw, 3.4rem);
+  font-weight: 800;
   letter-spacing: 0.08em;
   color: var(--color-ink);
   text-transform: uppercase;
@@ -90,8 +94,8 @@
 }
 
 .menuIcon {
-  width: 42px;
-  height: 42px;
+  width: 4rem;
+  height: 4rem;
 }
 
 .menuIconOnDark {
@@ -171,6 +175,14 @@
 
 .main {
   min-height: 100vh;
+}
+
+@media (max-width: 1200px) {
+  .logo {
+    height: 3rem;
+    margin-bottom: 0.4rem;
+  }
+
 }
 
 @media (max-width: 720px) {
