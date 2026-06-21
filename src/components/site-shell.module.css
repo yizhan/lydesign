@@ -60,27 +60,15 @@
 
 .logo {
   width: auto;
-  /* height: clamp(2rem, 2.5rem, 5rem); */
   height: 4rem;
   margin-right: 1rem;
-  margin-bottom: 1.4rem;
-  vertical-align: bottom;
-
+  vertical-align: middle;
 }
 
-.logoName {
-  font-family: var(--font-display), "Times New Roman", serif;
-  /* font-size: clamp(2rem, 1.8vw, 4rem); */
-  font-size: clamp(1.8rem, 4.8vw, 3.4rem);
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  color: var(--color-ink);
-  text-transform: uppercase;
-}
-
-.logoNameOnDark {
-  color: #f8f5ed;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.35);
+.logoText {
+  width: auto;
+  height: 2rem;
+  vertical-align: middle;
 }
 
 .menuButton {
@@ -177,12 +165,31 @@
   min-height: 100vh;
 }
 
+.slogan {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 20;
+  margin: 0;
+  width: min(90vw, 980px);
+  transform: translate(-50%, -50%);
+  color: #f8f5ed;
+  font-family: var(--font-display), "Times New Roman", serif;
+  font-size: clamp(2rem, 5.4vw, 5rem);
+  line-height: 1.04;
+  letter-spacing: 0;
+  text-align: center;
+  text-wrap: balance;
+  text-shadow: 0 2px 22px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+
 @media (max-width: 1200px) {
-  .logo {
+  .logo,
+  .logoText {
     height: 3rem;
     margin-bottom: 0.4rem;
   }
-
 }
 
 @media (max-width: 720px) {
@@ -190,7 +197,8 @@
     width: calc(100% - 1.5rem);
   }
 
-  .logo {
+  .logo,
+  .logoText {
     height: 2rem;
     margin-bottom: 0.4rem;
   }
@@ -199,6 +207,11 @@
     width: 48px;
     height: 2rem;
     margin-bottom: 0.4rem;
+  }
+
+  .slogan {
+    width: min(88vw, 26rem);
+    font-size: clamp(2rem, 11vw, 3.5rem);
   }
 }
 

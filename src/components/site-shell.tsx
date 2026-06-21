@@ -61,14 +61,22 @@ export function SiteShell({ children }: SiteShellProps) {
 
           <Link href="/" aria-label="LYDesign Home" className={styles.logoWrap}>
             <Image
-              src="/lydesign_logo.png"
+              src="/logo.png"
               alt="LYDesign logo"
-              width={300}
-              height={72}
+              width={200}
+              height={170}
               className={styles.logo}
               priority
             />
-            <span className={`${styles.logoName} ${isDarkHeader ? styles.logoNameOnDark : ""}`}>LYDesign</span>
+            <Image
+              src="/Logo_text.png"
+              alt=""
+              width={300}
+              height={29}
+              aria-hidden="true"
+              className={styles.logoText}
+              priority
+            />
           </Link>
         </div>
       </header>
@@ -104,6 +112,10 @@ export function SiteShell({ children }: SiteShellProps) {
           ))}
         </nav>
       </div>
+
+      {isHome && (
+        <p className={styles.slogan}>Designing Spaces, Shaping Futures</p>
+      )}
 
       <main className={styles.main}>{children}</main>
     </div>

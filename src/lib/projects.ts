@@ -30,7 +30,162 @@ export type Project = {
   status: ProjectStatus;
 };
 
+type RealProjectInput = {
+  title: string;
+  folder?: string;
+  images: string[];
+  excerpt: string;
+  year?: string;
+};
+
+const websitePhotoBase = "/Website photo";
+
+function slugify(title: string) {
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+function imagePath(folder: string, image: string) {
+  return `${websitePhotoBase}/${folder}/${image}`;
+}
+
+function createGalleryBlocks(images: string[]): ProjectGalleryBlock[] {
+  if (images.length === 3) {
+    return [{ layout: "triple", images }];
+  }
+
+  if (images.length >= 4) {
+    const blocks: ProjectGalleryBlock[] = [{ layout: "single", images: [images[0]] }];
+    const remaining = images.slice(1);
+
+    for (let index = 0; index < remaining.length; index += 3) {
+      const group = remaining.slice(index, index + 3);
+
+      if (group.length === 3) {
+        blocks.push({ layout: "triple", images: group });
+      } else {
+        blocks.push(...group.map((image) => ({ layout: "single" as const, images: [image] })));
+      }
+    }
+
+    return blocks;
+  }
+
+  return images.map((image) => ({ layout: "single", images: [image] }));
+}
+
+function realProject({
+  title,
+  folder = title,
+  images,
+  excerpt,
+  year = "2025",
+}: RealProjectInput): Project {
+  const gallery = images.map((image) => imagePath(folder, image));
+
+  return {
+    title,
+    slug: slugify(title),
+    location: "Auckland, NZ",
+    year,
+    category: "Residential",
+    coverImage: gallery[0],
+    topStripImage: gallery[0],
+    gallery,
+    galleryBlocks: createGalleryBlocks(gallery),
+    excerpt,
+    contentSections: [
+      {
+        heading: "Overview",
+        body: `${title} is part of LYDesign's residential portfolio, documented here with project imagery from the completed design work.`,
+      },
+    ],
+    status: "full",
+  };
+}
+
 export const projects: Project[] = [
+  realProject({
+    title: "Lemon Grove Lane",
+    images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg"],
+    excerpt:
+      "A residential project with a fuller image set, presented first to show the breadth of the completed design work.",
+  }),
+  realProject({
+    title: "Anehana Place",
+    images: ["1.jpg"],
+    excerpt: "A compact residential project entry focused on the main exterior design view.",
+  }),
+  realProject({
+    title: "Awanui Road",
+    images: ["1.jpg", "2.jpg", "3.jpg", "4.jpg"],
+    excerpt:
+      "A residential design project captured across multiple exterior views and facade moments.",
+  }),
+  realProject({
+    title: "Awanui Road 2",
+    images: ["1.jpg"],
+    excerpt: "A related Awanui Road residential project represented by its primary design image.",
+  }),
+  realProject({
+    title: "Brighton Road",
+    folder: "Brighton road",
+    images: ["brighton road parnell .jpg", "brighton road parnell  (2).jpg"],
+    excerpt: "A Parnell residential project with paired images showing the architectural proposal.",
+  }),
+  realProject({
+    title: "Dominion Rd",
+    images: ["Before 1.jpg", "Proposed.jpg"],
+    excerpt:
+      "A residential transformation project pairing the existing condition with the proposed design direction.",
+  }),
+  realProject({
+    title: "Hapua Street",
+    images: ["1.jpg", "2.jpg", "3.jpg"],
+    excerpt: "A residential project documented through a concise three-image exterior sequence.",
+  }),
+  realProject({
+    title: "Konei Place",
+    images: ["Konei Place, .jpg"],
+    excerpt: "A residential project entry led by its primary presentation image.",
+  }),
+  realProject({
+    title: "Mcrobbie Road",
+    images: [
+      "website main page.jpg",
+      "Image3.jpg",
+      "Image6.jpg",
+      "Image9.jpg",
+      "Image10.jpg",
+      "Image22.jpg",
+    ],
+    excerpt:
+      "A residential project with a broad image set, including the selected website main page view.",
+  }),
+  realProject({
+    title: "Sidwell Rd",
+    images: ["Sidwell Rd 1.jpg"],
+    excerpt: "A residential project represented by its primary Sidwell Road design image.",
+  }),
+  realProject({
+    title: "Somerset Road",
+    images: ["1.jpg"],
+    excerpt: "A residential project entry focused on the main architectural image.",
+  }),
+  realProject({
+    title: "Sunset Road",
+    images: ["1.jpg"],
+    excerpt: "A residential project represented by its primary exterior design image.",
+  }),
+  realProject({
+    title: "Sunset Road 2",
+    images: ["1.jpg"],
+    excerpt: "A second Sunset Road residential project represented by its primary image.",
+  }),
+  realProject({
+    title: "Weiti Bay",
+    images: ["1.jpg"],
+    excerpt: "A Weiti Bay residential project represented by its main design image.",
+  }),
   {
     title: "Seacliff Court Residence",
     slug: "seacliff-court-residence",
@@ -130,171 +285,6 @@ export const projects: Project[] = [
       },
     ],
     status: "full",
-  },
-  {
-    title: "Harbour Edge House",
-    slug: "harbour-edge-house",
-    location: "North Shore, NZ",
-    year: "2024",
-    category: "Residential",
-    coverImage:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1900&q=80",
-    ],
-    excerpt: "Cantilevered upper form with sheltered ground-level courtyard.",
-    contentSections: [],
-    status: "scaffold",
-  },
-  {
-    title: "Totara Ridge Pavilion",
-    slug: "totara-ridge-pavilion",
-    location: "Auckland, NZ",
-    year: "2024",
-    category: "Residential",
-    coverImage:
-      "https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1605146769289-440113cc3d00?auto=format&fit=crop&w=1900&q=80",
-    ],
-    excerpt: "Stepped volume with framed green outlook and textured masonry.",
-    contentSections: [],
-    status: "scaffold",
-  },
-  {
-    title: "Hillview Terrace",
-    slug: "hillview-terrace",
-    location: "Wellington, NZ",
-    year: "2023",
-    category: "Residential",
-    coverImage:
-      "https://images.unsplash.com/photo-1576941089067-2de3c901e126?auto=format&fit=crop&w=1800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1576941089067-2de3c901e126?auto=format&fit=crop&w=1900&q=80",
-    ],
-    excerpt: "Long roofline silhouette and sheltered entry court sequence.",
-    contentSections: [],
-    status: "scaffold",
-  },
-  {
-    title: "Cedar Lane Villa",
-    slug: "cedar-lane-villa",
-    location: "Auckland, NZ",
-    year: "2023",
-    category: "Residential",
-    coverImage:
-      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1900&q=80",
-    ],
-    excerpt: "Refined pavilion expression with timber and zinc cladding contrast.",
-    contentSections: [],
-    status: "scaffold",
-  },
-  {
-    title: "Fernbrook Residence",
-    slug: "fernbrook-residence",
-    location: "Auckland, NZ",
-    year: "2023",
-    category: "Residential",
-    coverImage:
-      "https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=1800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=1900&q=80",
-    ],
-    excerpt: "Dark vertical facade rhythm with deep set openings.",
-    contentSections: [],
-    status: "scaffold",
-  },
-  {
-    title: "Stonewater Court",
-    slug: "stonewater-court",
-    location: "Christchurch, NZ",
-    year: "2022",
-    category: "Residential",
-    coverImage:
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=1900&q=80",
-    ],
-    excerpt: "Textured masonry base with floating light-toned upper volume.",
-    contentSections: [],
-    status: "scaffold",
-  },
-  {
-    title: "Kauri Point House",
-    slug: "kauri-point-house",
-    location: "Auckland, NZ",
-    year: "2022",
-    category: "Residential",
-    coverImage:
-      "https://images.unsplash.com/photo-1600566753151-384129cf4e3e?auto=format&fit=crop&w=1800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1600566753151-384129cf4e3e?auto=format&fit=crop&w=1900&q=80",
-    ],
-    excerpt: "Dual-gabled massing composed with contemporary exterior language.",
-    contentSections: [],
-    status: "scaffold",
-  },
-  {
-    title: "Riverside Outlook",
-    slug: "riverside-outlook",
-    location: "Hamilton, NZ",
-    year: "2022",
-    category: "Residential",
-    coverImage:
-      "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?auto=format&fit=crop&w=1800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?auto=format&fit=crop&w=1900&q=80",
-    ],
-    excerpt: "Low horizontal volume anchoring panoramic river views.",
-    contentSections: [],
-    status: "scaffold",
-  },
-  {
-    title: "Coastline Retreat",
-    slug: "coastline-retreat",
-    location: "Coromandel, NZ",
-    year: "2021",
-    category: "Residential",
-    coverImage:
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1900&q=80",
-    ],
-    excerpt: "Weathered timber envelope designed for harsh coastal conditions.",
-    contentSections: [],
-    status: "scaffold",
-  },
-  {
-    title: "Orchard Corner Home",
-    slug: "orchard-corner-home",
-    location: "Tauranga, NZ",
-    year: "2021",
-    category: "Residential",
-    coverImage:
-      "https://images.unsplash.com/photo-1600585153490-76fb20a32601?auto=format&fit=crop&w=1800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1600585153490-76fb20a32601?auto=format&fit=crop&w=1900&q=80",
-    ],
-    excerpt: "Monolithic rendered form broken by recessed terraces and screens.",
-    contentSections: [],
-    status: "scaffold",
-  },
-  {
-    title: "Belmont Rise",
-    slug: "belmont-rise",
-    location: "Auckland, NZ",
-    year: "2021",
-    category: "Residential",
-    coverImage:
-      "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?auto=format&fit=crop&w=1800&q=80",
-    gallery: [
-      "https://images.unsplash.com/photo-1600047509358-9dc75507daeb?auto=format&fit=crop&w=1900&q=80",
-    ],
-    excerpt: "Crisp facade geometry and carefully framed entry procession.",
-    contentSections: [],
-    status: "scaffold",
   },
 ];
 
