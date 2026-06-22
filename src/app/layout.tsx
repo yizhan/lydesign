@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Work_Sans } from "next/font/google";
+import { Cinzel, Cormorant_Garamond, Work_Sans } from "next/font/google";
 import { SiteShell } from "@/components/site-shell";
 import "./globals.css";
 
@@ -13,6 +13,12 @@ const workSans = Work_Sans({
   variable: "--font-body",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+});
+
+const cinzel = Cinzel({
+  variable: "--font-logo",
+  subsets: ["latin"],
+  weight: ["700", "800", "900"],
 });
 
 export const metadata: Metadata = {
@@ -31,7 +37,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${cormorant.variable} ${workSans.variable}`}>
+      <body className={`${cormorant.variable} ${workSans.variable} ${cinzel.variable}`}>
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

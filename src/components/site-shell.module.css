@@ -174,10 +174,12 @@
   width: min(90vw, 980px);
   transform: translate(-50%, -50%);
   color: #f8f5ed;
-  font-family: var(--font-display), "Times New Roman", serif;
-  font-size: clamp(2rem, 5.4vw, 5rem);
-  line-height: 1.04;
-  letter-spacing: 0;
+  font-family: "Copperplate Gothic Bold", Copperplate, var(--font-logo), serif;
+  font-size: clamp(1.65rem, 4.4vw, 4.25rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   text-align: center;
   text-wrap: balance;
   text-shadow: 0 2px 22px rgba(0, 0, 0, 0.45);

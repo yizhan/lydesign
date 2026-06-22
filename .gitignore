@@ -42,3 +42,5 @@ next-env.d.ts
 
 .open-next/
 .codex-doc-cache/
+
+.pnpm-store/

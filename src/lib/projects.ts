@@ -38,7 +38,7 @@ type RealProjectInput = {
   year?: string;
 };
 
-const websitePhotoBase = "/Website photo";
+const websitePhotoBase = "/website-photo";
 
 function slugify(title: string) {
   return title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
@@ -75,7 +75,7 @@ function createGalleryBlocks(images: string[]): ProjectGalleryBlock[] {
 
 function realProject({
   title,
-  folder = title,
+  folder = slugify(title),
   images,
   excerpt,
   year = "2025",
@@ -128,13 +128,12 @@ export const projects: Project[] = [
   }),
   realProject({
     title: "Brighton Road",
-    folder: "Brighton road",
-    images: ["brighton road parnell .jpg", "brighton road parnell  (2).jpg"],
+    images: ["brighton-road-parnell.jpg", "brighton-road-parnell-2.jpg"],
     excerpt: "A Parnell residential project with paired images showing the architectural proposal.",
   }),
   realProject({
     title: "Dominion Rd",
-    images: ["Before 1.jpg", "Proposed.jpg"],
+    images: ["before-1.jpg", "proposed.jpg"],
     excerpt:
       "A residential transformation project pairing the existing condition with the proposed design direction.",
   }),
@@ -145,25 +144,25 @@ export const projects: Project[] = [
   }),
   realProject({
     title: "Konei Place",
-    images: ["Konei Place, .jpg"],
+    images: ["konei-place.jpg"],
     excerpt: "A residential project entry led by its primary presentation image.",
   }),
   realProject({
     title: "Mcrobbie Road",
     images: [
-      "website main page.jpg",
-      "Image3.jpg",
-      "Image6.jpg",
-      "Image9.jpg",
-      "Image10.jpg",
-      "Image22.jpg",
+      "website-main-page.jpg",
+      "image-3.jpg",
+      "image-6.jpg",
+      "image-9.jpg",
+      "image-10.jpg",
+      "image-22.jpg",
     ],
     excerpt:
       "A residential project with a broad image set, including the selected website main page view.",
   }),
   realProject({
     title: "Sidwell Rd",
-    images: ["Sidwell Rd 1.jpg"],
+    images: ["sidwell-rd-1.jpg"],
     excerpt: "A residential project represented by its primary Sidwell Road design image.",
   }),
   realProject({
