@@ -49,11 +49,17 @@ export default async function ProjectDetailPage({
     project.galleryBlocks ??
     project.gallery.map((imageSrc) => ({ layout: "single" as const, images: [imageSrc] }));
 
+  const projectSummary = project.excerpt.trim();
   const projectFacts = [
     { label: "Size", value: project.size },
     { label: "Completion Date", value: project.completionDate ?? project.year },
     { label: "Credits", value: project.credits },
-  ].filter((fact) => fact.value);
+  ].filter((fact): fact is { label: string; value: string } => Boolean(fact.value?.trim()));
+  const projectTags = project.tags?.filter((tag) => tag.trim()) ?? [];
+  const planImages = project.planImages?.filter((imageSrc) => imageSrc.trim()) ?? [];
+  const hasProjectMeta =
+    Boolean(projectSummary) || projectFacts.length > 0 || projectTags.length > 0;
+  const hasProjectIntro = hasProjectMeta || planImages.length > 0;
 
   return (
     <section className={`${styles.page} pageReveal`}>
@@ -69,44 +75,45 @@ export default async function ProjectDetailPage({
       </div>
 
       <div>
-        <header className={styles.projectIntro}>
-          <div className={styles.projectMeta}>
-            <h1>{project.title}</h1>
-            <p className={styles.summary}>{project.excerpt}</p>
-            <ul className={styles.factList}>
-              {projectFacts.map((fact) => (
-                <li key={fact.label} className={styles.factItem}>
-                  <span>{fact.label}</span>
-                  <strong>{fact.value}</strong>
-                </li>
-              ))}
-            </ul>
-            {project.tags && project.tags.length > 0 ? (
-              <p className={styles.tags}>{project.tags.join(" / ")}</p>
+        {hasProjectIntro ? (
+          <header className={styles.projectIntro}>
+            {hasProjectMeta ? (
+              <div className={styles.projectMeta}>
+                <h1>{project.title}</h1>
+                {projectSummary ? <p className={styles.summary}>{projectSummary}</p> : null}
+                {projectFacts.length > 0 ? (
+                  <ul className={styles.factList}>
+                    {projectFacts.map((fact) => (
+                      <li key={fact.label} className={styles.factItem}>
+                        <span>{fact.label}</span>
+                        <strong>{fact.value}</strong>
+                      </li>
+                    ))}
+                  </ul>
+                ) : null}
+                {projectTags.length > 0 ? (
+                  <p className={styles.tags}>{projectTags.join(" / ")}</p>
+                ) : null}
+              </div>
             ) : null}
-          </div>
 
-          {project.planImages && project.planImages.length > 0 ? (
-            <div className={styles.planGrid}>
-              {project.planImages.slice(0, 2).map((planSrc, index) => (
-                <div key={planSrc} className={styles.planItem}>
-                  <Image
-                    src={planSrc}
-                    alt={`${project.title} plan ${index + 1}`}
-                    fill
-                    sizes="(max-width: 700px) 100vw, 24vw"
-                    className={styles.planImage}
-                  />
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className={styles.planGrid} aria-hidden="true">
-              <div className={styles.planPlaceholder} />
-              <div className={styles.planPlaceholder} />
-            </div>
-          )}
-        </header>
+            {planImages.length > 0 ? (
+              <div className={styles.planGrid}>
+                {planImages.slice(0, 2).map((planSrc, index) => (
+                  <div key={planSrc} className={styles.planItem}>
+                    <Image
+                      src={planSrc}
+                      alt={`${project.title} plan ${index + 1}`}
+                      fill
+                      sizes="(max-width: 700px) 100vw, 24vw"
+                      className={styles.planImage}
+                    />
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </header>
+        ) : null}
 
         <div className={styles.galleryFlow}>
           {galleryBlocks.map((block, blockIndex) =>

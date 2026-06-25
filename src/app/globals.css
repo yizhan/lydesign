@@ -21,6 +21,9 @@
   --duration-slow: 760ms;
   --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+  --font-display: "Montserrat";
+  --font-body: "Montserrat";
+  --font-logo: "Montserrat";
 }
 
 html,
@@ -32,7 +35,7 @@ body {
 body {
   color: var(--color-ink);
   background: var(--color-white);
-  font-family: var(--font-body), "Trebuchet MS", sans-serif;
+  font-family: var(--font-body), Arial, sans-serif;
   line-height: 1.45;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -68,7 +71,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-display), "Times New Roman", serif;
+  font-family: var(--font-display), Arial, sans-serif;
   font-weight: 600;
   letter-spacing: 0.02em;
 }

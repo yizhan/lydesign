@@ -58,7 +58,7 @@
 }
 
 .serviceTitle {
-  font-family: var(--font-display), "Times New Roman", serif;
+  font-family: var(--font-display), Arial, sans-serif;
   font-size: clamp(1.4rem, 2.2vw, 2rem);
   font-weight: 600;
   line-height: 1.1;
@@ -127,7 +127,7 @@
 }
 
 .stepTitle {
-  font-family: var(--font-display), "Times New Roman", serif;
+  font-family: var(--font-display), Arial, sans-serif;
   font-size: clamp(1.1rem, 1.5vw, 1.3rem);
   font-weight: 600;
 }

@@ -155,7 +155,7 @@
 }
 
 .memberName {
-  font-family: var(--font-display), "Times New Roman", serif;
+  font-family: var(--font-display), Arial, sans-serif;
   font-size: 1rem;
   font-weight: 600;
 }

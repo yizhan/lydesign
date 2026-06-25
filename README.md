@@ -9,7 +9,7 @@ Marketing and portfolio website for **LYDesign**, an Auckland-based residential 
 - **Framework**: Next.js 15, App Router, React 19
 - **Styling**: CSS Modules (no CSS framework)
 - **Images**: `next/image` with static assets from `/public` and Unsplash remote patterns
-- **Fonts**: Google Fonts via `next/font` — display serif paired with body sans-serif
+- **Fonts**: Google Fonts stylesheet link in `src/app/layout.tsx` — Montserrat across display, body, and logo typography
 - **Language**: TypeScript throughout
 - **Deployment**: Vercel (recommended)
 
@@ -29,9 +29,10 @@ A warm neutral palette with high contrast black ink on white/paper surfaces. Dar
 | `--color-white` | `#ffffff` | Page background |
 
 ### Typography
-Two-font pairing defined via CSS variables:
-- `--font-display` — serif display font used for all headings (`h1`–`h6`), nav links, project titles
-- `--font-body` — sans-serif used for body copy, labels, UI text
+Font family defined via CSS variables:
+- `--font-display` — Montserrat used for all headings (`h1`–`h6`), nav links, project titles
+- `--font-body` — Montserrat used for body copy, labels, UI text
+- `--font-logo` — Montserrat used for logo-style text and slogan styling
 
 Type sizes use `clamp()` throughout for fluid scaling without breakpoint jumps.
 

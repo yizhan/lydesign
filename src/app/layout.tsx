@@ -1,25 +1,6 @@
 import type { Metadata } from "next";
-import { Cinzel, Cormorant_Garamond, Work_Sans } from "next/font/google";
 import { SiteShell } from "@/components/site-shell";
 import "./globals.css";
-
-const cormorant = Cormorant_Garamond({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-});
-
-const workSans = Work_Sans({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-});
-
-const cinzel = Cinzel({
-  variable: "--font-logo",
-  subsets: ["latin"],
-  weight: ["700", "800", "900"],
-});
 
 export const metadata: Metadata = {
   title: {
@@ -37,7 +18,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${cormorant.variable} ${workSans.variable} ${cinzel.variable}`}>
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* eslint-disable-next-line @next/next/no-page-custom-font -- Load Montserrat from Google at runtime instead of bundling it with next/font. */}
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
+      <body>
         <SiteShell>{children}</SiteShell>
       </body>
     </html>

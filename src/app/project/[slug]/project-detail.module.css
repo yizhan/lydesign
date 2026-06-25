@@ -58,7 +58,7 @@
 
 .factItem strong {
   color: #1b1a18;
-  font-family: var(--font-body), "Trebuchet MS", sans-serif;
+  font-family: var(--font-body), Arial, sans-serif;
   font-weight: 500;
 }
 
@@ -159,7 +159,7 @@
 }
 
 .navLink strong {
-  font-family: var(--font-display), "Times New Roman", serif;
+  font-family: var(--font-display), Arial, sans-serif;
   font-size: clamp(1rem, 1.7vw, 1.36rem);
   color: #171614;
   font-weight: 600;
